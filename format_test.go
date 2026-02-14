@@ -57,6 +57,29 @@ func TestFormat(t *testing.T) {
 		// Compose fallback for unlisted platforms
 		{Go, Platform{Arch: "mips64le", OS: "linux"}, "linux/mips64le"},
 		{Rust, Platform{Arch: "s390x", OS: "linux", Vendor: "unknown", ABI: "gnu"}, "s390x-unknown-linux-gnu"},
+
+		// NuGet
+		{NuGet, Platform{Arch: "x86_64", OS: "linux"}, "linux-x64"},
+		{NuGet, Platform{Arch: "x86_64", OS: "linux", ABI: "musl"}, "linux-musl-x64"},
+		{NuGet, Platform{Arch: "aarch64", OS: "darwin"}, "osx-arm64"},
+		{NuGet, Platform{Arch: "x86_64", OS: "windows"}, "win-x64"},
+
+		// vcpkg
+		{Vcpkg, Platform{Arch: "x86_64", OS: "linux"}, "x64-linux"},
+		{Vcpkg, Platform{Arch: "aarch64", OS: "darwin"}, "arm64-osx"},
+		{Vcpkg, Platform{Arch: "x86_64", OS: "windows"}, "x64-windows"},
+
+		// Swift
+		{Swift, Platform{Arch: "aarch64", OS: "darwin", Vendor: "apple"}, "aarch64-apple-darwin"},
+		{Swift, Platform{Arch: "x86_64", OS: "linux", Vendor: "unknown", ABI: "gnu"}, "x86_64-unknown-linux-gnu"},
+
+		// Kotlin
+		{Kotlin, Platform{Arch: "x86_64", OS: "linux"}, "linuxX64"},
+		{Kotlin, Platform{Arch: "aarch64", OS: "darwin"}, "macosArm64"},
+
+		// Maven
+		{Maven, Platform{Arch: "x86_64", OS: "linux"}, "linux-x86_64"},
+		{Maven, Platform{Arch: "aarch64", OS: "darwin"}, "osx-aarch_64"},
 	}
 
 	for _, tt := range tests {

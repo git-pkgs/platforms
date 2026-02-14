@@ -71,6 +71,20 @@ func decompose(idx *indices, eco Ecosystem, s string) (Platform, bool) {
 		return decomposePython(idx, s)
 	case Debian:
 		return decomposeDebian(idx, s)
+	case NuGet:
+		return decomposeNuGet(idx, s)
+	case Vcpkg:
+		return decomposeVcpkg(idx, s)
+	case Conan:
+		return decomposeConan(idx, s)
+	case Homebrew:
+		return decomposeHomebrew(idx, s)
+	case Swift:
+		return decomposeRustLLVM(idx, Swift, s)
+	case Kotlin:
+		return decomposeKotlin(idx, s)
+	case Maven:
+		return decomposeMaven(idx, s)
 	}
 	return Platform{}, false
 }
@@ -245,6 +259,111 @@ func parsePythonVersions(s string, p *Platform) {
 	} else if m := reMacOSX.FindStringSubmatch(s); m != nil {
 		p.OSVersion = m[1] + "." + m[2]
 	}
+}
+
+// nuget: os-arch or os-musl-arch (e.g., linux-x64, linux-musl-x64, win-arm64, osx-x64)
+func decomposeNuGet(idx *indices, s string) (Platform, bool) {
+	parts := strings.SplitN(s, "-", 3)
+	if len(parts) == 3 && strings.ToLower(parts[1]) == "musl" {
+		osName := resolveOS(idx, NuGet, parts[0])
+		arch := resolveArch(idx, NuGet, parts[2])
+		if osName == "" || arch == "" {
+			return Platform{}, false
+		}
+		return Platform{Arch: arch, OS: osName, ABI: "musl"}, true
+	}
+	if len(parts) < 2 {
+		return Platform{}, false
+	}
+	osName := resolveOS(idx, NuGet, parts[0])
+	arch := resolveArch(idx, NuGet, parts[1])
+	if osName == "" || arch == "" {
+		return Platform{}, false
+	}
+	return Platform{Arch: arch, OS: osName}, true
+}
+
+// vcpkg: arch-os (e.g., x64-linux, arm64-osx, x64-windows)
+func decomposeVcpkg(idx *indices, s string) (Platform, bool) {
+	parts := strings.SplitN(s, "-", 2)
+	if len(parts) != 2 {
+		return Platform{}, false
+	}
+	arch := resolveArch(idx, Vcpkg, parts[0])
+	osName := resolveOS(idx, Vcpkg, parts[1])
+	if arch == "" || osName == "" {
+		return Platform{}, false
+	}
+	return Platform{Arch: arch, OS: osName}, true
+}
+
+// conan: structured settings, but we handle "os-arch" style strings
+// Conan uses settings like os=Linux, arch=armv8 but we parse "os/arch" pairs
+func decomposeConan(idx *indices, s string) (Platform, bool) {
+	// Try os/arch with slash separator
+	parts := strings.SplitN(s, "/", 2)
+	if len(parts) == 2 {
+		osName := resolveOS(idx, Conan, parts[0])
+		arch := resolveArch(idx, Conan, parts[1])
+		if osName != "" && arch != "" {
+			return Platform{Arch: arch, OS: osName}, true
+		}
+	}
+	// Try os-arch with dash separator
+	parts = strings.SplitN(s, "-", 2)
+	if len(parts) == 2 {
+		osName := resolveOS(idx, Conan, parts[0])
+		arch := resolveArch(idx, Conan, parts[1])
+		if osName != "" && arch != "" {
+			return Platform{Arch: arch, OS: osName}, true
+		}
+	}
+	return Platform{}, false
+}
+
+// homebrew: arch_codename (e.g., arm64_sonoma, arm64_ventura)
+// We can only extract the arch since the codename maps to a macOS version, not a canonical OS
+func decomposeHomebrew(idx *indices, s string) (Platform, bool) {
+	parts := strings.SplitN(s, "_", 2)
+	if len(parts) != 2 {
+		return Platform{}, false
+	}
+	arch := resolveArch(idx, Homebrew, parts[0])
+	if arch == "" {
+		return Platform{}, false
+	}
+	// Homebrew is macOS-only
+	return Platform{Arch: arch, OS: "darwin", Vendor: "apple"}, true
+}
+
+// kotlin: camelCase DSL names (e.g., linuxX64, macosArm64, mingwX64, iosArm64, androidNativeArm64)
+var reKotlin = regexp.MustCompile(`^([a-z]+)([A-Z]\w+)$`)
+
+func decomposeKotlin(idx *indices, s string) (Platform, bool) {
+	m := reKotlin.FindStringSubmatch(s)
+	if m == nil {
+		return Platform{}, false
+	}
+	osName := resolveOS(idx, Kotlin, m[1])
+	arch := resolveArch(idx, Kotlin, m[2])
+	if osName == "" || arch == "" {
+		return Platform{}, false
+	}
+	return Platform{Arch: arch, OS: osName}, true
+}
+
+// maven: os-arch (e.g., linux-x86_64, osx-aarch_64, windows-x86_64)
+func decomposeMaven(idx *indices, s string) (Platform, bool) {
+	parts := strings.SplitN(s, "-", 2)
+	if len(parts) != 2 {
+		return Platform{}, false
+	}
+	osName := resolveOS(idx, Maven, parts[0])
+	arch := resolveArch(idx, Maven, parts[1])
+	if osName == "" || arch == "" {
+		return Platform{}, false
+	}
+	return Platform{Arch: arch, OS: osName}, true
 }
 
 func validEcosystem(eco Ecosystem) bool {

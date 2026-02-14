@@ -6,8 +6,8 @@ import (
 
 func TestEcosystems(t *testing.T) {
 	ecos := Ecosystems()
-	if len(ecos) != 7 {
-		t.Fatalf("expected 7 ecosystems, got %d", len(ecos))
+	if len(ecos) != 14 {
+		t.Fatalf("expected 14 ecosystems, got %d", len(ecos))
 	}
 
 	// Should be sorted.
@@ -18,7 +18,7 @@ func TestEcosystems(t *testing.T) {
 	}
 
 	// Check all expected ecosystems are present.
-	want := map[Ecosystem]bool{Go: true, Node: true, Rust: true, RubyGems: true, Python: true, Debian: true, LLVM: true}
+	want := map[Ecosystem]bool{Go: true, Node: true, Rust: true, RubyGems: true, Python: true, Debian: true, LLVM: true, NuGet: true, Vcpkg: true, Conan: true, Homebrew: true, Swift: true, Kotlin: true, Maven: true}
 	for _, e := range ecos {
 		if !want[e] {
 			t.Errorf("unexpected ecosystem: %s", e)

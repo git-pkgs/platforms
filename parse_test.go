@@ -80,6 +80,34 @@ func TestParse(t *testing.T) {
 
 		// RubyGems mingw32 -> mingw ABI entry
 		{RubyGems, "x64-mingw32", Platform{Arch: "x86_64", OS: "windows", Vendor: "pc", ABI: "mingw"}},
+
+		// NuGet
+		{NuGet, "linux-x64", Platform{Arch: "x86_64", OS: "linux", Vendor: "unknown", ABI: "gnu"}},
+		{NuGet, "linux-musl-x64", Platform{Arch: "x86_64", OS: "linux", Vendor: "unknown", ABI: "musl"}},
+		{NuGet, "osx-arm64", Platform{Arch: "aarch64", OS: "darwin", Vendor: "apple"}},
+		{NuGet, "win-x64", Platform{Arch: "x86_64", OS: "windows", Vendor: "pc", ABI: "msvc"}},
+
+		// vcpkg
+		{Vcpkg, "x64-linux", Platform{Arch: "x86_64", OS: "linux", Vendor: "unknown", ABI: "gnu"}},
+		{Vcpkg, "arm64-osx", Platform{Arch: "aarch64", OS: "darwin", Vendor: "apple"}},
+		{Vcpkg, "x64-windows", Platform{Arch: "x86_64", OS: "windows", Vendor: "pc", ABI: "msvc"}},
+
+		// Swift (uses LLVM triples)
+		{Swift, "aarch64-apple-darwin", Platform{Arch: "aarch64", OS: "darwin", Vendor: "apple"}},
+		{Swift, "x86_64-unknown-linux-gnu", Platform{Arch: "x86_64", OS: "linux", Vendor: "unknown", ABI: "gnu"}},
+
+		// Kotlin
+		{Kotlin, "linuxX64", Platform{Arch: "x86_64", OS: "linux", Vendor: "unknown", ABI: "gnu"}},
+		{Kotlin, "macosArm64", Platform{Arch: "aarch64", OS: "darwin", Vendor: "apple"}},
+		{Kotlin, "mingwX64", Platform{Arch: "x86_64", OS: "windows", Vendor: "pc", ABI: "msvc"}},
+
+		// Maven
+		{Maven, "linux-x86_64", Platform{Arch: "x86_64", OS: "linux", Vendor: "unknown", ABI: "gnu"}},
+		{Maven, "osx-aarch_64", Platform{Arch: "aarch64", OS: "darwin", Vendor: "apple"}},
+		{Maven, "windows-x86_64", Platform{Arch: "x86_64", OS: "windows", Vendor: "pc", ABI: "msvc"}},
+
+		// Homebrew
+		{Homebrew, "arm64_sonoma", Platform{Arch: "aarch64", OS: "darwin", Vendor: "apple"}},
 	}
 
 	for _, tt := range tests {

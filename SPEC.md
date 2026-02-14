@@ -32,7 +32,7 @@ OS names use lowercase kernel names:
 
 ## Ecosystems
 
-Seven ecosystems are supported: `go`, `node`, `rust`, `rubygems`, `python`, `debian`, `llvm`.
+Fourteen ecosystems are supported: `go`, `node`, `rust`, `rubygems`, `python`, `debian`, `llvm`, `nuget`, `vcpkg`, `conan`, `homebrew`, `swift`, `kotlin`, `maven`.
 
 ## Data files
 
@@ -63,6 +63,13 @@ Only ecosystems that have a distinct string for the exact combination should app
    - **Python**: match against `manylinux_M_m_arch`, `musllinux_M_m_arch`, `macosx_M_m_arch`, `win_arch`, `win32`, or `linux_arch`
    - **Debian**: split on `-` as `arch-os-abi`
    - **LLVM**: split on `-` as `arch-vendor-os[-abi]`
+   - **NuGet**: split on `-` as `os-arch` or `os-musl-arch`
+   - **vcpkg**: split on `-` as `arch-os`
+   - **Conan**: split on `/` or `-` as `os/arch` or `os-arch`
+   - **Homebrew**: split on `_` as `arch_codename` (always macOS)
+   - **Swift**: same as LLVM (`arch-vendor-os[-abi]`)
+   - **Kotlin**: split camelCase as `osArch` (e.g., `linuxX64`)
+   - **Maven**: split on `-` as `os-arch`
 3. Resolve each component through the arch/OS reverse lookup indices
 4. Return `ErrUnknownPlatform` if neither approach works
 

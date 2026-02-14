@@ -1,3 +1,3 @@
 module github.com/git-pkgs/platforms
 
-go 1.23.0
+go 1.25.0

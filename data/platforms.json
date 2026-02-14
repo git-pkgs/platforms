@@ -12,7 +12,12 @@
         "rubygems": "x86_64-linux",
         "python": ["manylinux_2_17_x86_64", "linux_x86_64"],
         "debian": "x86_64-linux-gnu",
-        "llvm": "x86_64-pc-linux-gnu"
+        "llvm": "x86_64-pc-linux-gnu",
+        "nuget": "linux-x64",
+        "vcpkg": "x64-linux",
+        "swift": "x86_64-unknown-linux-gnu",
+        "kotlin": "linuxX64",
+        "maven": "linux-x86_64"
       }
     },
     {
@@ -25,7 +30,9 @@
         "rubygems": "x86_64-linux-musl",
         "python": "musllinux_1_1_x86_64",
         "debian": "x86_64-linux-musl",
-        "llvm": "x86_64-pc-linux-musl"
+        "llvm": "x86_64-pc-linux-musl",
+        "nuget": "linux-musl-x64",
+        "swift": "x86_64-unknown-linux-musl"
       }
     },
     {
@@ -40,7 +47,12 @@
         "rubygems": "aarch64-linux",
         "python": ["manylinux_2_17_aarch64", "linux_aarch64"],
         "debian": "aarch64-linux-gnu",
-        "llvm": "aarch64-pc-linux-gnu"
+        "llvm": "aarch64-pc-linux-gnu",
+        "nuget": "linux-arm64",
+        "vcpkg": "arm64-linux",
+        "swift": "aarch64-unknown-linux-gnu",
+        "kotlin": "linuxArm64",
+        "maven": "linux-aarch_64"
       }
     },
     {
@@ -53,7 +65,9 @@
         "rubygems": "aarch64-linux-musl",
         "python": "musllinux_1_1_aarch64",
         "debian": "aarch64-linux-musl",
-        "llvm": "aarch64-pc-linux-musl"
+        "llvm": "aarch64-pc-linux-musl",
+        "nuget": "linux-musl-arm64",
+        "swift": "aarch64-unknown-linux-musl"
       }
     },
     {
@@ -66,7 +80,12 @@
         "rust": "aarch64-apple-darwin",
         "rubygems": "arm64-darwin",
         "python": "macosx_11_0_arm64",
-        "llvm": "aarch64-apple-darwin"
+        "llvm": "aarch64-apple-darwin",
+        "nuget": "osx-arm64",
+        "vcpkg": "arm64-osx",
+        "swift": "aarch64-apple-darwin",
+        "kotlin": "macosArm64",
+        "maven": "osx-aarch_64"
       }
     },
     {
@@ -79,7 +98,12 @@
         "rust": "x86_64-apple-darwin",
         "rubygems": "x86_64-darwin",
         "python": "macosx_10_9_x86_64",
-        "llvm": "x86_64-apple-darwin"
+        "llvm": "x86_64-apple-darwin",
+        "nuget": "osx-x64",
+        "vcpkg": "x64-osx",
+        "swift": "x86_64-apple-darwin",
+        "kotlin": "macosX64",
+        "maven": "osx-x86_64"
       }
     },
     {
@@ -93,7 +117,12 @@
         "rust": "x86_64-pc-windows-msvc",
         "rubygems": "x64-mingw-ucrt",
         "python": "win_amd64",
-        "llvm": "x86_64-pc-windows-msvc"
+        "llvm": "x86_64-pc-windows-msvc",
+        "nuget": "win-x64",
+        "vcpkg": "x64-windows",
+        "swift": "x86_64-pc-windows-msvc",
+        "kotlin": "mingwX64",
+        "maven": "windows-x86_64"
       }
     },
     {
@@ -118,7 +147,10 @@
         "rust": "i686-pc-windows-msvc",
         "rubygems": "x86-mingw32",
         "python": "win32",
-        "llvm": "i686-pc-windows-msvc"
+        "llvm": "i686-pc-windows-msvc",
+        "nuget": "win-x86",
+        "vcpkg": "x86-windows",
+        "maven": "windows-x86_32"
       }
     },
     {
@@ -131,7 +163,9 @@
         "node": "win32-arm64",
         "rust": "aarch64-pc-windows-msvc",
         "python": "win_arm64",
-        "llvm": "aarch64-pc-windows-msvc"
+        "llvm": "aarch64-pc-windows-msvc",
+        "nuget": "win-arm64",
+        "vcpkg": "arm64-windows"
       }
     },
     {
@@ -161,7 +195,8 @@
         "rubygems": "arm-linux",
         "python": "linux_armv7l",
         "debian": "arm-linux-gnueabihf",
-        "llvm": "arm-unknown-linux-gnueabihf"
+        "llvm": "arm-unknown-linux-gnueabihf",
+        "nuget": "linux-arm"
       }
     },
     {
@@ -176,7 +211,8 @@
         "rubygems": "s390x-linux",
         "python": ["manylinux_2_17_s390x", "linux_s390x"],
         "debian": "s390x-linux-gnu",
-        "llvm": "s390x-unknown-linux-gnu"
+        "llvm": "s390x-unknown-linux-gnu",
+        "nuget": "linux-s390x"
       }
     },
     {
@@ -261,7 +297,8 @@
       "strings": {
         "go": "android/arm64",
         "rust": "aarch64-linux-android",
-        "llvm": "aarch64-unknown-linux-android"
+        "llvm": "aarch64-unknown-linux-android",
+        "kotlin": "androidNativeArm64"
       }
     },
     {
@@ -271,7 +308,9 @@
       "strings": {
         "go": "ios/arm64",
         "rust": "aarch64-apple-ios",
-        "llvm": "aarch64-apple-ios"
+        "llvm": "aarch64-apple-ios",
+        "swift": "aarch64-apple-ios",
+        "kotlin": "iosArm64"
       }
     }
   ]

@@ -35,6 +35,13 @@ s, _ = platforms.Normalize(platforms.Python, "linux_x86_64")
 | `python` | `manylinux_2_17_x86_64` | `tag_version_arch` |
 | `debian` | `x86_64-linux-gnu` | `arch-os-abi` |
 | `llvm` | `aarch64-apple-darwin` | `arch-vendor-os` |
+| `nuget` | `linux-x64` | `os-arch` |
+| `vcpkg` | `x64-linux` | `arch-os` |
+| `conan` | `Linux/armv8` | `os/arch` (settings) |
+| `homebrew` | `arm64_sonoma` | `arch_codename` |
+| `swift` | `aarch64-apple-darwin` | LLVM triples |
+| `kotlin` | `linuxX64` | `osArch` (camelCase) |
+| `maven` | `linux-aarch_64` | `os-arch` |
 
 ## How it works
 

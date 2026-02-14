@@ -6,7 +6,14 @@
     "rubygems": "linux",
     "python": ["linux", "manylinux", "musllinux"],
     "debian": "linux",
-    "llvm": "linux"
+    "llvm": "linux",
+    "nuget": "linux",
+    "vcpkg": "linux",
+    "conan": "Linux",
+    "homebrew": null,
+    "swift": "linux",
+    "kotlin": "Linux",
+    "maven": "linux"
   },
   "darwin": {
     "go": "darwin",
@@ -15,7 +22,14 @@
     "rubygems": "darwin",
     "python": "macosx",
     "debian": null,
-    "llvm": "darwin"
+    "llvm": "darwin",
+    "nuget": "osx",
+    "vcpkg": "osx",
+    "conan": "Macos",
+    "homebrew": "darwin",
+    "swift": "darwin",
+    "kotlin": "Macos",
+    "maven": "osx"
   },
   "windows": {
     "go": "windows",
@@ -24,7 +38,14 @@
     "rubygems": ["mingw32", "mswin32"],
     "python": "win",
     "debian": null,
-    "llvm": "windows"
+    "llvm": "windows",
+    "nuget": "win",
+    "vcpkg": "windows",
+    "conan": "Windows",
+    "homebrew": null,
+    "swift": "windows",
+    "kotlin": "Mingw",
+    "maven": "windows"
   },
   "freebsd": {
     "go": "freebsd",
@@ -33,7 +54,14 @@
     "rubygems": "freebsd",
     "python": "freebsd",
     "debian": "kfreebsd",
-    "llvm": "freebsd"
+    "llvm": "freebsd",
+    "nuget": "freebsd",
+    "vcpkg": null,
+    "conan": "FreeBSD",
+    "homebrew": null,
+    "swift": "freebsd",
+    "kotlin": null,
+    "maven": "freebsd"
   },
   "netbsd": {
     "go": "netbsd",
@@ -42,7 +70,14 @@
     "rubygems": "netbsd",
     "python": "netbsd",
     "debian": null,
-    "llvm": "netbsd"
+    "llvm": "netbsd",
+    "nuget": null,
+    "vcpkg": null,
+    "conan": null,
+    "homebrew": null,
+    "swift": null,
+    "kotlin": null,
+    "maven": null
   },
   "openbsd": {
     "go": "openbsd",
@@ -51,7 +86,14 @@
     "rubygems": "openbsd",
     "python": "openbsd",
     "debian": null,
-    "llvm": "openbsd"
+    "llvm": "openbsd",
+    "nuget": null,
+    "vcpkg": null,
+    "conan": null,
+    "homebrew": null,
+    "swift": null,
+    "kotlin": null,
+    "maven": null
   },
   "android": {
     "go": "android",
@@ -60,7 +102,14 @@
     "rubygems": null,
     "python": null,
     "debian": null,
-    "llvm": "android"
+    "llvm": "android",
+    "nuget": "android",
+    "vcpkg": null,
+    "conan": "Android",
+    "homebrew": null,
+    "swift": "android",
+    "kotlin": "Android",
+    "maven": null
   },
   "ios": {
     "go": "ios",
@@ -69,7 +118,14 @@
     "rubygems": null,
     "python": null,
     "debian": null,
-    "llvm": "ios"
+    "llvm": "ios",
+    "nuget": "ios",
+    "vcpkg": null,
+    "conan": "iOS",
+    "homebrew": null,
+    "swift": "ios",
+    "kotlin": null,
+    "maven": null
   },
   "aix": {
     "go": "aix",
@@ -78,7 +134,14 @@
     "rubygems": null,
     "python": "aix",
     "debian": null,
-    "llvm": null
+    "llvm": null,
+    "nuget": null,
+    "vcpkg": null,
+    "conan": null,
+    "homebrew": null,
+    "swift": null,
+    "kotlin": null,
+    "maven": "aix"
   },
   "solaris": {
     "go": "solaris",
@@ -87,7 +150,14 @@
     "rubygems": "solaris",
     "python": "sunos",
     "debian": null,
-    "llvm": "solaris"
+    "llvm": "solaris",
+    "nuget": null,
+    "vcpkg": null,
+    "conan": null,
+    "homebrew": null,
+    "swift": null,
+    "kotlin": null,
+    "maven": "sunos"
   },
   "dragonfly": {
     "go": "dragonfly",
@@ -96,7 +166,14 @@
     "rubygems": null,
     "python": null,
     "debian": null,
-    "llvm": "dragonfly"
+    "llvm": "dragonfly",
+    "nuget": null,
+    "vcpkg": null,
+    "conan": null,
+    "homebrew": null,
+    "swift": null,
+    "kotlin": null,
+    "maven": null
   },
   "illumos": {
     "go": "illumos",
@@ -105,7 +182,14 @@
     "rubygems": null,
     "python": null,
     "debian": null,
-    "llvm": "illumos"
+    "llvm": "illumos",
+    "nuget": null,
+    "vcpkg": null,
+    "conan": null,
+    "homebrew": null,
+    "swift": null,
+    "kotlin": null,
+    "maven": null
   },
   "plan9": {
     "go": "plan9",
@@ -114,6 +198,13 @@
     "rubygems": null,
     "python": null,
     "debian": null,
-    "llvm": null
+    "llvm": null,
+    "nuget": null,
+    "vcpkg": null,
+    "conan": null,
+    "homebrew": null,
+    "swift": null,
+    "kotlin": null,
+    "maven": null
   }
 }

@@ -113,6 +113,37 @@ func compose(idx *indices, eco Ecosystem, p Platform) (string, error) {
 			return arch + "-" + vendor + "-" + osName + "-" + abi, nil
 		}
 		return arch + "-" + vendor + "-" + osName, nil
+	case NuGet:
+		if p.ABI == "musl" {
+			return osName + "-musl-" + arch, nil
+		}
+		return osName + "-" + arch, nil
+	case Vcpkg:
+		return arch + "-" + osName, nil
+	case Conan:
+		return osName + "/" + arch, nil
+	case Homebrew:
+		if p.OS != "darwin" {
+			return "", &ErrNoMapping{Ecosystem: eco, Platform: p}
+		}
+		return arch + "_darwin", nil
+	case Swift:
+		vendor := p.Vendor
+		if vendor == "" {
+			vendor = defaultVendor(p.OS)
+		}
+		abi := p.ABI
+		if abi == "" && p.OS == "linux" {
+			abi = "gnu"
+		}
+		if abi != "" {
+			return arch + "-" + vendor + "-" + osName + "-" + abi, nil
+		}
+		return arch + "-" + vendor + "-" + osName, nil
+	case Kotlin:
+		return osName + arch, nil
+	case Maven:
+		return osName + "-" + arch, nil
 	}
 	return "", &ErrNoMapping{Ecosystem: eco, Platform: p}
 }

@@ -27,7 +27,7 @@ func TestArchesJSONValid(t *testing.T) {
 		t.Fatalf("arches.json: %v", err)
 	}
 
-	ecos := []string{"go", "node", "rust", "rubygems", "python", "debian", "llvm"}
+	ecos := []string{"go", "node", "rust", "rubygems", "python", "debian", "llvm", "nuget", "vcpkg", "conan", "homebrew", "swift", "kotlin", "maven"}
 	for arch, ecoMap := range data {
 		for _, eco := range ecos {
 			raw, ok := ecoMap[eco]
@@ -53,7 +53,7 @@ func TestOsesJSONValid(t *testing.T) {
 		t.Fatalf("oses.json: %v", err)
 	}
 
-	ecos := []string{"go", "node", "rust", "rubygems", "python", "debian", "llvm"}
+	ecos := []string{"go", "node", "rust", "rubygems", "python", "debian", "llvm", "nuget", "vcpkg", "conan", "homebrew", "swift", "kotlin", "maven"}
 	for osName, ecoMap := range data {
 		for _, eco := range ecos {
 			raw, ok := ecoMap[eco]
@@ -96,7 +96,7 @@ func TestNoDuplicateStringsWithinEcosystem(t *testing.T) {
 		t.Fatalf("loadData: %v", err)
 	}
 
-	ecos := []string{"go", "node", "rust", "rubygems", "python", "debian", "llvm"}
+	ecos := []string{"go", "node", "rust", "rubygems", "python", "debian", "llvm", "nuget", "vcpkg", "conan", "homebrew", "swift", "kotlin", "maven"}
 	for _, eco := range ecos {
 		seen := make(map[string]int) // string -> first platform index
 		for i, p := range idx.platFile.Platforms {

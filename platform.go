@@ -18,9 +18,16 @@ const (
 	Python   Ecosystem = "python"
 	Debian   Ecosystem = "debian"
 	LLVM     Ecosystem = "llvm"
+	NuGet    Ecosystem = "nuget"
+	Vcpkg    Ecosystem = "vcpkg"
+	Conan    Ecosystem = "conan"
+	Homebrew Ecosystem = "homebrew"
+	Swift    Ecosystem = "swift"
+	Kotlin   Ecosystem = "kotlin"
+	Maven    Ecosystem = "maven"
 )
 
-var allEcosystems = []Ecosystem{Go, Node, Rust, RubyGems, Python, Debian, LLVM}
+var allEcosystems = []Ecosystem{Go, Node, Rust, RubyGems, Python, Debian, LLVM, NuGet, Vcpkg, Conan, Homebrew, Swift, Kotlin, Maven}
 
 // Ecosystems returns all supported ecosystem identifiers in sorted order.
 func Ecosystems() []Ecosystem {

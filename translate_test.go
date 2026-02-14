@@ -46,6 +46,27 @@ func TestTranslate(t *testing.T) {
 		// Cross-ecosystem with musl
 		{Rust, RubyGems, "x86_64-unknown-linux-musl", "x86_64-linux-musl"},
 		{RubyGems, Rust, "x86_64-linux-musl", "x86_64-unknown-linux-musl"},
+
+		// NuGet -> Rust
+		{NuGet, Rust, "linux-x64", "x86_64-unknown-linux-gnu"},
+		{NuGet, Rust, "linux-musl-x64", "x86_64-unknown-linux-musl"},
+		{NuGet, Rust, "osx-arm64", "aarch64-apple-darwin"},
+
+		// Go -> vcpkg
+		{Go, Vcpkg, "linux/amd64", "x64-linux"},
+		{Go, Vcpkg, "darwin/arm64", "arm64-osx"},
+
+		// Kotlin -> Go
+		{Kotlin, Go, "linuxX64", "linux/amd64"},
+		{Kotlin, Go, "macosArm64", "darwin/arm64"},
+
+		// Maven -> Node
+		{Maven, Node, "linux-x86_64", "linux-x64"},
+		{Maven, Node, "osx-aarch_64", "darwin-arm64"},
+
+		// Go -> NuGet
+		{Go, NuGet, "linux/amd64", "linux-x64"},
+		{Go, NuGet, "darwin/arm64", "osx-arm64"},
 	}
 
 	for _, tt := range tests {

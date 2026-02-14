@@ -6,7 +6,14 @@
     "rubygems": "x86_64",
     "python": "x86_64",
     "debian": "x86_64",
-    "llvm": "x86_64"
+    "llvm": "x86_64",
+    "nuget": "x64",
+    "vcpkg": "x64",
+    "conan": "x86_64",
+    "homebrew": null,
+    "swift": "x86_64",
+    "kotlin": "X64",
+    "maven": "x86_64"
   },
   "aarch64": {
     "go": "arm64",
@@ -15,7 +22,14 @@
     "rubygems": ["aarch64", "arm64"],
     "python": "aarch64",
     "debian": "aarch64",
-    "llvm": "aarch64"
+    "llvm": "aarch64",
+    "nuget": "arm64",
+    "vcpkg": "arm64",
+    "conan": "armv8",
+    "homebrew": "arm64",
+    "swift": "aarch64",
+    "kotlin": "Arm64",
+    "maven": ["aarch_64", "aarch64"]
   },
   "i686": {
     "go": "386",
@@ -24,7 +38,14 @@
     "rubygems": "x86",
     "python": "i686",
     "debian": "i386",
-    "llvm": "i686"
+    "llvm": "i686",
+    "nuget": "x86",
+    "vcpkg": "x86",
+    "conan": "x86",
+    "homebrew": null,
+    "swift": "i686",
+    "kotlin": null,
+    "maven": "x86_32"
   },
   "arm": {
     "go": "arm",
@@ -33,7 +54,14 @@
     "rubygems": "arm",
     "python": "arm",
     "debian": "arm",
-    "llvm": "arm"
+    "llvm": "arm",
+    "nuget": "arm",
+    "vcpkg": "arm",
+    "conan": "armv7",
+    "homebrew": null,
+    "swift": "arm",
+    "kotlin": "Arm32",
+    "maven": "arm_32"
   },
   "riscv64": {
     "go": "riscv64",
@@ -42,7 +70,14 @@
     "rubygems": "riscv64",
     "python": "riscv64",
     "debian": "riscv64",
-    "llvm": "riscv64"
+    "llvm": "riscv64",
+    "nuget": null,
+    "vcpkg": null,
+    "conan": null,
+    "homebrew": null,
+    "swift": "riscv64",
+    "kotlin": null,
+    "maven": null
   },
   "s390x": {
     "go": "s390x",
@@ -51,7 +86,14 @@
     "rubygems": "s390x",
     "python": "s390x",
     "debian": "s390x",
-    "llvm": "s390x"
+    "llvm": "s390x",
+    "nuget": "s390x",
+    "vcpkg": null,
+    "conan": null,
+    "homebrew": null,
+    "swift": "s390x",
+    "kotlin": null,
+    "maven": "s390_64"
   },
   "ppc64": {
     "go": "ppc64",
@@ -60,7 +102,14 @@
     "rubygems": "ppc64",
     "python": "ppc64",
     "debian": "ppc64",
-    "llvm": "powerpc64"
+    "llvm": "powerpc64",
+    "nuget": null,
+    "vcpkg": null,
+    "conan": null,
+    "homebrew": null,
+    "swift": "powerpc64",
+    "kotlin": null,
+    "maven": "ppc_64"
   },
   "ppc64le": {
     "go": "ppc64le",
@@ -69,7 +118,14 @@
     "rubygems": "ppc64le",
     "python": "ppc64le",
     "debian": "ppc64el",
-    "llvm": "powerpc64le"
+    "llvm": "powerpc64le",
+    "nuget": null,
+    "vcpkg": null,
+    "conan": null,
+    "homebrew": null,
+    "swift": "powerpc64le",
+    "kotlin": null,
+    "maven": null
   },
   "loong64": {
     "go": "loong64",
@@ -78,7 +134,14 @@
     "rubygems": null,
     "python": "loongarch64",
     "debian": "loong64",
-    "llvm": "loongarch64"
+    "llvm": "loongarch64",
+    "nuget": null,
+    "vcpkg": null,
+    "conan": null,
+    "homebrew": null,
+    "swift": null,
+    "kotlin": null,
+    "maven": null
   },
   "mips": {
     "go": "mips",
@@ -87,7 +150,14 @@
     "rubygems": "mips",
     "python": "mips",
     "debian": "mips",
-    "llvm": "mips"
+    "llvm": "mips",
+    "nuget": null,
+    "vcpkg": null,
+    "conan": "mips",
+    "homebrew": null,
+    "swift": "mips",
+    "kotlin": null,
+    "maven": null
   },
   "mips64": {
     "go": "mips64",
@@ -96,7 +166,14 @@
     "rubygems": "mips64",
     "python": "mips64",
     "debian": "mips64",
-    "llvm": "mips64"
+    "llvm": "mips64",
+    "nuget": null,
+    "vcpkg": null,
+    "conan": "mips64",
+    "homebrew": null,
+    "swift": "mips64",
+    "kotlin": null,
+    "maven": null
   },
   "mipsle": {
     "go": "mipsle",
@@ -105,7 +182,14 @@
     "rubygems": "mipsel",
     "python": "mipsel",
     "debian": "mipsel",
-    "llvm": "mipsel"
+    "llvm": "mipsel",
+    "nuget": null,
+    "vcpkg": null,
+    "conan": null,
+    "homebrew": null,
+    "swift": "mipsel",
+    "kotlin": null,
+    "maven": null
   },
   "mips64le": {
     "go": "mips64le",
@@ -114,6 +198,13 @@
     "rubygems": "mips64el",
     "python": "mips64el",
     "debian": "mips64el",
-    "llvm": "mips64el"
+    "llvm": "mips64el",
+    "nuget": null,
+    "vcpkg": null,
+    "conan": null,
+    "homebrew": null,
+    "swift": "mips64el",
+    "kotlin": null,
+    "maven": null
   }
 }
