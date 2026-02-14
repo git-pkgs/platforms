@@ -51,6 +51,10 @@ Parsing tries the pre-computed index first, then falls back to decomposing the s
 
 See [SPEC.md](SPEC.md) for the full specification.
 
+## Related
+
+[archspec](https://github.com/archspec/archspec) ([Go port](https://github.com/archspec/archspec-go)) models CPU microarchitectures as a compatibility DAG -- it knows that zen3 descends from zen2 and which instruction sets each supports. This module works one level up, mapping the coarse arch/OS/ABI strings that package managers use. The two are complementary: archspec's `Family()` returns architecture family names (`x86_64`, `aarch64`) that match the canonical arch names used here.
+
 ## License
 
 MIT
