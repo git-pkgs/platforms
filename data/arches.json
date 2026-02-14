@@ -1,0 +1,119 @@
+{
+  "x86_64": {
+    "go": "amd64",
+    "node": "x64",
+    "rust": "x86_64",
+    "rubygems": "x86_64",
+    "python": "x86_64",
+    "debian": "x86_64",
+    "llvm": "x86_64"
+  },
+  "aarch64": {
+    "go": "arm64",
+    "node": "arm64",
+    "rust": "aarch64",
+    "rubygems": ["aarch64", "arm64"],
+    "python": "aarch64",
+    "debian": "aarch64",
+    "llvm": "aarch64"
+  },
+  "i686": {
+    "go": "386",
+    "node": "ia32",
+    "rust": "i686",
+    "rubygems": "x86",
+    "python": "i686",
+    "debian": "i386",
+    "llvm": "i686"
+  },
+  "arm": {
+    "go": "arm",
+    "node": "arm",
+    "rust": "arm",
+    "rubygems": "arm",
+    "python": "arm",
+    "debian": "arm",
+    "llvm": "arm"
+  },
+  "riscv64": {
+    "go": "riscv64",
+    "node": null,
+    "rust": "riscv64gc",
+    "rubygems": "riscv64",
+    "python": "riscv64",
+    "debian": "riscv64",
+    "llvm": "riscv64"
+  },
+  "s390x": {
+    "go": "s390x",
+    "node": "s390x",
+    "rust": "s390x",
+    "rubygems": "s390x",
+    "python": "s390x",
+    "debian": "s390x",
+    "llvm": "s390x"
+  },
+  "ppc64": {
+    "go": "ppc64",
+    "node": "ppc64",
+    "rust": "powerpc64",
+    "rubygems": "ppc64",
+    "python": "ppc64",
+    "debian": "ppc64",
+    "llvm": "powerpc64"
+  },
+  "ppc64le": {
+    "go": "ppc64le",
+    "node": "ppc64",
+    "rust": "powerpc64le",
+    "rubygems": "ppc64le",
+    "python": "ppc64le",
+    "debian": "ppc64el",
+    "llvm": "powerpc64le"
+  },
+  "loong64": {
+    "go": "loong64",
+    "node": null,
+    "rust": "loongarch64",
+    "rubygems": null,
+    "python": "loongarch64",
+    "debian": "loong64",
+    "llvm": "loongarch64"
+  },
+  "mips": {
+    "go": "mips",
+    "node": null,
+    "rust": "mips",
+    "rubygems": "mips",
+    "python": "mips",
+    "debian": "mips",
+    "llvm": "mips"
+  },
+  "mips64": {
+    "go": "mips64",
+    "node": null,
+    "rust": "mips64",
+    "rubygems": "mips64",
+    "python": "mips64",
+    "debian": "mips64",
+    "llvm": "mips64"
+  },
+  "mipsle": {
+    "go": "mipsle",
+    "node": null,
+    "rust": "mipsel",
+    "rubygems": "mipsel",
+    "python": "mipsel",
+    "debian": "mipsel",
+    "llvm": "mipsel"
+  },
+  "mips64le": {
+    "go": "mips64le",
+    "node": null,
+    "rust": "mips64el",
+    "rubygems": "mips64el",
+    "python": "mips64el",
+    "debian": "mips64el",
+    "llvm": "mips64el"
+  }
+}

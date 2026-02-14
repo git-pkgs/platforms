@@ -1,0 +1,119 @@
+{
+  "linux": {
+    "go": "linux",
+    "node": "linux",
+    "rust": "linux",
+    "rubygems": "linux",
+    "python": ["linux", "manylinux", "musllinux"],
+    "debian": "linux",
+    "llvm": "linux"
+  },
+  "darwin": {
+    "go": "darwin",
+    "node": "darwin",
+    "rust": "darwin",
+    "rubygems": "darwin",
+    "python": "macosx",
+    "debian": null,
+    "llvm": "darwin"
+  },
+  "windows": {
+    "go": "windows",
+    "node": "win32",
+    "rust": "windows",
+    "rubygems": ["mingw32", "mswin32"],
+    "python": "win",
+    "debian": null,
+    "llvm": "windows"
+  },
+  "freebsd": {
+    "go": "freebsd",
+    "node": "freebsd",
+    "rust": "freebsd",
+    "rubygems": "freebsd",
+    "python": "freebsd",
+    "debian": "kfreebsd",
+    "llvm": "freebsd"
+  },
+  "netbsd": {
+    "go": "netbsd",
+    "node": null,
+    "rust": "netbsd",
+    "rubygems": "netbsd",
+    "python": "netbsd",
+    "debian": null,
+    "llvm": "netbsd"
+  },
+  "openbsd": {
+    "go": "openbsd",
+    "node": "openbsd",
+    "rust": "openbsd",
+    "rubygems": "openbsd",
+    "python": "openbsd",
+    "debian": null,
+    "llvm": "openbsd"
+  },
+  "android": {
+    "go": "android",
+    "node": null,
+    "rust": "android",
+    "rubygems": null,
+    "python": null,
+    "debian": null,
+    "llvm": "android"
+  },
+  "ios": {
+    "go": "ios",
+    "node": null,
+    "rust": "ios",
+    "rubygems": null,
+    "python": null,
+    "debian": null,
+    "llvm": "ios"
+  },
+  "aix": {
+    "go": "aix",
+    "node": "aix",
+    "rust": null,
+    "rubygems": null,
+    "python": "aix",
+    "debian": null,
+    "llvm": null
+  },
+  "solaris": {
+    "go": "solaris",
+    "node": "sunos",
+    "rust": "solaris",
+    "rubygems": "solaris",
+    "python": "sunos",
+    "debian": null,
+    "llvm": "solaris"
+  },
+  "dragonfly": {
+    "go": "dragonfly",
+    "node": null,
+    "rust": "dragonfly",
+    "rubygems": null,
+    "python": null,
+    "debian": null,
+    "llvm": "dragonfly"
+  },
+  "illumos": {
+    "go": "illumos",
+    "node": null,
+    "rust": "illumos",
+    "rubygems": null,
+    "python": null,
+    "debian": null,
+    "llvm": "illumos"
+  },
+  "plan9": {
+    "go": "plan9",
+    "node": null,
+    "rust": null,
+    "rubygems": null,
+    "python": null,
+    "debian": null,
+    "llvm": null
+  }
+}

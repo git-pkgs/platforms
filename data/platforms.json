@@ -1,0 +1,278 @@
+{
+  "platforms": [
+    {
+      "arch": "x86_64",
+      "os": "linux",
+      "vendor": "unknown",
+      "abi": "gnu",
+      "strings": {
+        "go": "linux/amd64",
+        "node": "linux-x64",
+        "rust": "x86_64-unknown-linux-gnu",
+        "rubygems": "x86_64-linux",
+        "python": ["manylinux_2_17_x86_64", "linux_x86_64"],
+        "debian": "x86_64-linux-gnu",
+        "llvm": "x86_64-pc-linux-gnu"
+      }
+    },
+    {
+      "arch": "x86_64",
+      "os": "linux",
+      "vendor": "unknown",
+      "abi": "musl",
+      "strings": {
+        "rust": "x86_64-unknown-linux-musl",
+        "rubygems": "x86_64-linux-musl",
+        "python": "musllinux_1_1_x86_64",
+        "debian": "x86_64-linux-musl",
+        "llvm": "x86_64-pc-linux-musl"
+      }
+    },
+    {
+      "arch": "aarch64",
+      "os": "linux",
+      "vendor": "unknown",
+      "abi": "gnu",
+      "strings": {
+        "go": "linux/arm64",
+        "node": "linux-arm64",
+        "rust": "aarch64-unknown-linux-gnu",
+        "rubygems": "aarch64-linux",
+        "python": ["manylinux_2_17_aarch64", "linux_aarch64"],
+        "debian": "aarch64-linux-gnu",
+        "llvm": "aarch64-pc-linux-gnu"
+      }
+    },
+    {
+      "arch": "aarch64",
+      "os": "linux",
+      "vendor": "unknown",
+      "abi": "musl",
+      "strings": {
+        "rust": "aarch64-unknown-linux-musl",
+        "rubygems": "aarch64-linux-musl",
+        "python": "musllinux_1_1_aarch64",
+        "debian": "aarch64-linux-musl",
+        "llvm": "aarch64-pc-linux-musl"
+      }
+    },
+    {
+      "arch": "aarch64",
+      "os": "darwin",
+      "vendor": "apple",
+      "strings": {
+        "go": "darwin/arm64",
+        "node": "darwin-arm64",
+        "rust": "aarch64-apple-darwin",
+        "rubygems": "arm64-darwin",
+        "python": "macosx_11_0_arm64",
+        "llvm": "aarch64-apple-darwin"
+      }
+    },
+    {
+      "arch": "x86_64",
+      "os": "darwin",
+      "vendor": "apple",
+      "strings": {
+        "go": "darwin/amd64",
+        "node": "darwin-x64",
+        "rust": "x86_64-apple-darwin",
+        "rubygems": "x86_64-darwin",
+        "python": "macosx_10_9_x86_64",
+        "llvm": "x86_64-apple-darwin"
+      }
+    },
+    {
+      "arch": "x86_64",
+      "os": "windows",
+      "vendor": "pc",
+      "abi": "msvc",
+      "strings": {
+        "go": "windows/amd64",
+        "node": "win32-x64",
+        "rust": "x86_64-pc-windows-msvc",
+        "rubygems": "x64-mingw-ucrt",
+        "python": "win_amd64",
+        "llvm": "x86_64-pc-windows-msvc"
+      }
+    },
+    {
+      "arch": "x86_64",
+      "os": "windows",
+      "vendor": "pc",
+      "abi": "mingw",
+      "strings": {
+        "rust": "x86_64-pc-windows-gnu",
+        "rubygems": "x64-mingw32",
+        "llvm": "x86_64-pc-windows-gnu"
+      }
+    },
+    {
+      "arch": "i686",
+      "os": "windows",
+      "vendor": "pc",
+      "abi": "msvc",
+      "strings": {
+        "go": "windows/386",
+        "node": "win32-ia32",
+        "rust": "i686-pc-windows-msvc",
+        "rubygems": "x86-mingw32",
+        "python": "win32",
+        "llvm": "i686-pc-windows-msvc"
+      }
+    },
+    {
+      "arch": "aarch64",
+      "os": "windows",
+      "vendor": "pc",
+      "abi": "msvc",
+      "strings": {
+        "go": "windows/arm64",
+        "node": "win32-arm64",
+        "rust": "aarch64-pc-windows-msvc",
+        "python": "win_arm64",
+        "llvm": "aarch64-pc-windows-msvc"
+      }
+    },
+    {
+      "arch": "i686",
+      "os": "linux",
+      "vendor": "unknown",
+      "abi": "gnu",
+      "strings": {
+        "go": "linux/386",
+        "node": "linux-ia32",
+        "rust": "i686-unknown-linux-gnu",
+        "rubygems": "x86-linux",
+        "python": ["manylinux_2_17_i686", "linux_i686"],
+        "debian": "i386-linux-gnu",
+        "llvm": "i686-pc-linux-gnu"
+      }
+    },
+    {
+      "arch": "arm",
+      "os": "linux",
+      "vendor": "unknown",
+      "abi": "eabihf",
+      "strings": {
+        "go": "linux/arm",
+        "node": "linux-arm",
+        "rust": "arm-unknown-linux-gnueabihf",
+        "rubygems": "arm-linux",
+        "python": "linux_armv7l",
+        "debian": "arm-linux-gnueabihf",
+        "llvm": "arm-unknown-linux-gnueabihf"
+      }
+    },
+    {
+      "arch": "s390x",
+      "os": "linux",
+      "vendor": "unknown",
+      "abi": "gnu",
+      "strings": {
+        "go": "linux/s390x",
+        "node": "linux-s390x",
+        "rust": "s390x-unknown-linux-gnu",
+        "rubygems": "s390x-linux",
+        "python": ["manylinux_2_17_s390x", "linux_s390x"],
+        "debian": "s390x-linux-gnu",
+        "llvm": "s390x-unknown-linux-gnu"
+      }
+    },
+    {
+      "arch": "ppc64le",
+      "os": "linux",
+      "vendor": "unknown",
+      "abi": "gnu",
+      "strings": {
+        "go": "linux/ppc64le",
+        "node": "linux-ppc64",
+        "rust": "powerpc64le-unknown-linux-gnu",
+        "rubygems": "ppc64le-linux",
+        "python": ["manylinux_2_17_ppc64le", "linux_ppc64le"],
+        "debian": "ppc64el-linux-gnu",
+        "llvm": "powerpc64le-unknown-linux-gnu"
+      }
+    },
+    {
+      "arch": "riscv64",
+      "os": "linux",
+      "vendor": "unknown",
+      "abi": "gnu",
+      "strings": {
+        "go": "linux/riscv64",
+        "rust": "riscv64gc-unknown-linux-gnu",
+        "rubygems": "riscv64-linux",
+        "python": "linux_riscv64",
+        "debian": "riscv64-linux-gnu",
+        "llvm": "riscv64-unknown-linux-gnu"
+      }
+    },
+    {
+      "arch": "x86_64",
+      "os": "freebsd",
+      "vendor": "unknown",
+      "strings": {
+        "go": "freebsd/amd64",
+        "node": "freebsd-x64",
+        "rust": "x86_64-unknown-freebsd",
+        "rubygems": "x86_64-freebsd",
+        "llvm": "x86_64-unknown-freebsd"
+      }
+    },
+    {
+      "arch": "aarch64",
+      "os": "freebsd",
+      "vendor": "unknown",
+      "strings": {
+        "go": "freebsd/arm64",
+        "rust": "aarch64-unknown-freebsd",
+        "rubygems": "aarch64-freebsd",
+        "llvm": "aarch64-unknown-freebsd"
+      }
+    },
+    {
+      "arch": "x86_64",
+      "os": "netbsd",
+      "vendor": "unknown",
+      "strings": {
+        "go": "netbsd/amd64",
+        "rust": "x86_64-unknown-netbsd",
+        "rubygems": "x86_64-netbsd",
+        "llvm": "x86_64-unknown-netbsd"
+      }
+    },
+    {
+      "arch": "x86_64",
+      "os": "openbsd",
+      "vendor": "unknown",
+      "strings": {
+        "go": "openbsd/amd64",
+        "node": "openbsd-x64",
+        "rust": "x86_64-unknown-openbsd",
+        "rubygems": "x86_64-openbsd",
+        "llvm": "x86_64-unknown-openbsd"
+      }
+    },
+    {
+      "arch": "aarch64",
+      "os": "android",
+      "vendor": "unknown",
+      "strings": {
+        "go": "android/arm64",
+        "rust": "aarch64-linux-android",
+        "llvm": "aarch64-unknown-linux-android"
+      }
+    },
+    {
+      "arch": "aarch64",
+      "os": "ios",
+      "vendor": "apple",
+      "strings": {
+        "go": "ios/arm64",
+        "rust": "aarch64-apple-ios",
+        "llvm": "aarch64-apple-ios"
+      }
+    }
+  ]
+}
