@@ -45,8 +45,12 @@ s, _ = platforms.Normalize(platforms.Python, "linux_x86_64")
 
 ## How it works
 
-The mapping data lives in JSON files under `data/`. `arches.json` and `oses.json` map canonical names to per-ecosystem aliases. `platforms.json` has pre-computed full strings for common platforms that can't be composed mechanically (like RubyGems using `arm64` on macOS but `aarch64` on Linux).
+The mapping data lives in JSON files under `data/`. `arches.json` and `oses.json` map canonical names to per-ecosystem aliases. [`platforms.json`](data/platforms.json) has pre-computed full strings for common platforms that can't be composed mechanically (like RubyGems using `arm64` on macOS but `aarch64` on Linux).
 
 Parsing tries the pre-computed index first, then falls back to decomposing the string using ecosystem-specific rules and resolving components through the alias tables.
 
 See [SPEC.md](SPEC.md) for the full specification.
+
+## License
+
+MIT
