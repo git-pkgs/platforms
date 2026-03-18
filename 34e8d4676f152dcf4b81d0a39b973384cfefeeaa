@@ -1,0 +1,29 @@
+parse.go
+  87eee7e07d523b0b 9-15,101-102,115-116,129-130,143,151-152,164,177-179,183,196,203,211,219,227-228,245-252,255-258,273-274,280,282,295-296,311-312,320-321,334-335,343,364-365
+data.go
+  87eee7e07d523b0b 19-20,95
+translate_test.go
+  87eee7e07d523b0b 139
+format.go
+  87eee7e07d523b0b 8-22,90,92,96,98,100,106,108,117,123-146,150-160,168,170,179-182,190-193,201-206,214,225-226,240
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.1.15",
+  "base_commit_sha": "34e8d4676f152dcf4b81d0a39b973384cfefeeaa",
+  "prompts": {
+    "87eee7e07d523b0b": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "b759e0cc-1854-462d-83bb-9b139119308e",
+        "model": "claude-opus-4-6"
+      },
+      "human_author": "Andrew Nesbitt <andrewnez@gmail.com>",
+      "messages": [],
+      "total_additions": 149,
+      "total_deletions": 125,
+      "accepted_lines": 138,
+      "overriden_lines": 0
+    }
+  }
+}
