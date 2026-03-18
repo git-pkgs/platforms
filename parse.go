@@ -6,6 +6,13 @@ import (
 	"strings"
 )
 
+// Split limits for strings.SplitN in decompose functions.
+const (
+	splitTwo   = 2
+	splitThree = 3
+	splitFour  = 4
+)
+
 var (
 	// manylinux_2_17_x86_64, musllinux_1_1_aarch64
 	reManylinux = regexp.MustCompile(`^(many|musl)linux_(\d+)_(\d+)_(\w+)$`)
@@ -91,8 +98,8 @@ func decompose(idx *indices, eco Ecosystem, s string) (Platform, bool) {
 
 // go: os/arch
 func decomposeGo(idx *indices, s string) (Platform, bool) {
-	parts := strings.SplitN(s, "/", 2)
-	if len(parts) != 2 {
+	parts := strings.SplitN(s, "/", splitTwo)
+	if len(parts) != splitTwo {
 		return Platform{}, false
 	}
 	osName := resolveOS(idx, Go, parts[0])
@@ -105,8 +112,8 @@ func decomposeGo(idx *indices, s string) (Platform, bool) {
 
 // node: os-arch
 func decomposeNode(idx *indices, s string) (Platform, bool) {
-	parts := strings.SplitN(s, "-", 2)
-	if len(parts) != 2 {
+	parts := strings.SplitN(s, "-", splitTwo)
+	if len(parts) != splitTwo {
 		return Platform{}, false
 	}
 	osName := resolveOS(idx, Node, parts[0])
@@ -119,8 +126,8 @@ func decomposeNode(idx *indices, s string) (Platform, bool) {
 
 // rust/llvm: arch-vendor-os[-abi]
 func decomposeRustLLVM(idx *indices, eco Ecosystem, s string) (Platform, bool) {
-	parts := strings.SplitN(s, "-", 4)
-	if len(parts) < 3 {
+	parts := strings.SplitN(s, "-", splitFour)
+	if len(parts) < splitThree {
 		return Platform{}, false
 	}
 	arch := resolveArch(idx, eco, parts[0])
@@ -133,7 +140,7 @@ func decomposeRustLLVM(idx *indices, eco Ecosystem, s string) (Platform, bool) {
 		return Platform{}, false
 	}
 	p := Platform{Arch: arch, OS: osName, Vendor: vendor}
-	if len(parts) == 4 {
+	if len(parts) == splitFour {
 		p.ABI = normalizeABI(parts[3])
 	}
 	return p, true
@@ -141,8 +148,8 @@ func decomposeRustLLVM(idx *indices, eco Ecosystem, s string) (Platform, bool) {
 
 // rubygems: arch-os[-abi]  or cpu-os[-version]
 func decomposeRubyGems(idx *indices, s string) (Platform, bool) {
-	parts := strings.SplitN(s, "-", 3)
-	if len(parts) < 2 {
+	parts := strings.SplitN(s, "-", splitThree)
+	if len(parts) < splitTwo {
 		return Platform{}, false
 	}
 	arch := resolveArch(idx, RubyGems, parts[0])
@@ -154,7 +161,7 @@ func decomposeRubyGems(idx *indices, s string) (Platform, bool) {
 		return Platform{}, false
 	}
 	p := Platform{Arch: arch, OS: osName}
-	if len(parts) == 3 {
+	if len(parts) == splitThree {
 		p.ABI = normalizeABI(parts[2])
 	}
 	return p, true
@@ -167,13 +174,13 @@ func decomposePython(idx *indices, s string) (Platform, bool) {
 		if arch == "" {
 			return Platform{}, false
 		}
-		abi := "gnu"
-		if m[1] == "musl" {
-			abi = "musl"
+		abi := abiGNU
+		if m[1] == abiMusl {
+			abi = abiMusl
 		}
 		return Platform{
 			Arch:        arch,
-			OS:          "linux",
+			OS:          osLinux,
 			ABI:         abi,
 			LibCVersion: m[2] + "." + m[3],
 		}, true
@@ -186,14 +193,14 @@ func decomposePython(idx *indices, s string) (Platform, bool) {
 		}
 		return Platform{
 			Arch:      arch,
-			OS:        "darwin",
+			OS:        osDarwin,
 			Vendor:    "apple",
 			OSVersion: m[1] + "." + m[2],
 		}, true
 	}
 
 	if s == "win32" {
-		return Platform{Arch: "i686", OS: "windows", Vendor: "pc"}, true
+		return Platform{Arch: "i686", OS: osWindows, Vendor: "pc"}, true
 	}
 
 	if m := reWinPython.FindStringSubmatch(s); m != nil && m[1] != "" {
@@ -201,7 +208,7 @@ func decomposePython(idx *indices, s string) (Platform, bool) {
 		if arch == "" {
 			return Platform{}, false
 		}
-		return Platform{Arch: arch, OS: "windows", Vendor: "pc"}, true
+		return Platform{Arch: arch, OS: osWindows, Vendor: "pc"}, true
 	}
 
 	if m := reLinuxPython.FindStringSubmatch(s); m != nil {
@@ -209,7 +216,7 @@ func decomposePython(idx *indices, s string) (Platform, bool) {
 		if arch == "" {
 			return Platform{}, false
 		}
-		return Platform{Arch: arch, OS: "linux"}, true
+		return Platform{Arch: arch, OS: osLinux}, true
 	}
 
 	return Platform{}, false
@@ -217,8 +224,8 @@ func decomposePython(idx *indices, s string) (Platform, bool) {
 
 // debian: arch-os-abi
 func decomposeDebian(idx *indices, s string) (Platform, bool) {
-	parts := strings.SplitN(s, "-", 3)
-	if len(parts) != 3 {
+	parts := strings.SplitN(s, "-", splitThree)
+	if len(parts) != splitThree {
 		return Platform{}, false
 	}
 	arch := resolveArch(idx, Debian, parts[0])
@@ -235,20 +242,20 @@ func decomposeDebian(idx *indices, s string) (Platform, bool) {
 func normalizeABI(s string) string {
 	s = strings.ToLower(s)
 	switch {
-	case s == "gnu" || s == "gnueabi":
-		return "gnu"
-	case s == "gnueabihf":
-		return "eabihf"
-	case s == "musl":
-		return "musl"
-	case s == "msvc":
-		return "msvc"
+	case s == abiGNU || s == abiGNUEABI:
+		return abiGNU
+	case s == abiGNUEABIHF:
+		return abiEABIHF
+	case s == abiMusl:
+		return abiMusl
+	case s == abiMSVC:
+		return abiMSVC
 	case strings.HasPrefix(s, "mingw"):
 		return "mingw"
-	case s == "eabi":
-		return "eabi"
-	case s == "eabihf":
-		return "eabihf"
+	case s == abiEABI:
+		return abiEABI
+	case s == abiEABIHF:
+		return abiEABIHF
 	}
 	return s
 }
@@ -263,16 +270,16 @@ func parsePythonVersions(s string, p *Platform) {
 
 // nuget: os-arch or os-musl-arch (e.g., linux-x64, linux-musl-x64, win-arm64, osx-x64)
 func decomposeNuGet(idx *indices, s string) (Platform, bool) {
-	parts := strings.SplitN(s, "-", 3)
-	if len(parts) == 3 && strings.ToLower(parts[1]) == "musl" {
+	parts := strings.SplitN(s, "-", splitThree)
+	if len(parts) == splitThree && strings.ToLower(parts[1]) == abiMusl {
 		osName := resolveOS(idx, NuGet, parts[0])
 		arch := resolveArch(idx, NuGet, parts[2])
 		if osName == "" || arch == "" {
 			return Platform{}, false
 		}
-		return Platform{Arch: arch, OS: osName, ABI: "musl"}, true
+		return Platform{Arch: arch, OS: osName, ABI: abiMusl}, true
 	}
-	if len(parts) < 2 {
+	if len(parts) < splitTwo {
 		return Platform{}, false
 	}
 	osName := resolveOS(idx, NuGet, parts[0])
@@ -285,8 +292,8 @@ func decomposeNuGet(idx *indices, s string) (Platform, bool) {
 
 // vcpkg: arch-os (e.g., x64-linux, arm64-osx, x64-windows)
 func decomposeVcpkg(idx *indices, s string) (Platform, bool) {
-	parts := strings.SplitN(s, "-", 2)
-	if len(parts) != 2 {
+	parts := strings.SplitN(s, "-", splitTwo)
+	if len(parts) != splitTwo {
 		return Platform{}, false
 	}
 	arch := resolveArch(idx, Vcpkg, parts[0])
@@ -301,8 +308,8 @@ func decomposeVcpkg(idx *indices, s string) (Platform, bool) {
 // Conan uses settings like os=Linux, arch=armv8 but we parse "os/arch" pairs
 func decomposeConan(idx *indices, s string) (Platform, bool) {
 	// Try os/arch with slash separator
-	parts := strings.SplitN(s, "/", 2)
-	if len(parts) == 2 {
+	parts := strings.SplitN(s, "/", splitTwo)
+	if len(parts) == splitTwo {
 		osName := resolveOS(idx, Conan, parts[0])
 		arch := resolveArch(idx, Conan, parts[1])
 		if osName != "" && arch != "" {
@@ -310,8 +317,8 @@ func decomposeConan(idx *indices, s string) (Platform, bool) {
 		}
 	}
 	// Try os-arch with dash separator
-	parts = strings.SplitN(s, "-", 2)
-	if len(parts) == 2 {
+	parts = strings.SplitN(s, "-", splitTwo)
+	if len(parts) == splitTwo {
 		osName := resolveOS(idx, Conan, parts[0])
 		arch := resolveArch(idx, Conan, parts[1])
 		if osName != "" && arch != "" {
@@ -324,8 +331,8 @@ func decomposeConan(idx *indices, s string) (Platform, bool) {
 // homebrew: arch_codename (e.g., arm64_sonoma, arm64_ventura)
 // We can only extract the arch since the codename maps to a macOS version, not a canonical OS
 func decomposeHomebrew(idx *indices, s string) (Platform, bool) {
-	parts := strings.SplitN(s, "_", 2)
-	if len(parts) != 2 {
+	parts := strings.SplitN(s, "_", splitTwo)
+	if len(parts) != splitTwo {
 		return Platform{}, false
 	}
 	arch := resolveArch(idx, Homebrew, parts[0])
@@ -333,7 +340,7 @@ func decomposeHomebrew(idx *indices, s string) (Platform, bool) {
 		return Platform{}, false
 	}
 	// Homebrew is macOS-only
-	return Platform{Arch: arch, OS: "darwin", Vendor: "apple"}, true
+	return Platform{Arch: arch, OS: osDarwin, Vendor: "apple"}, true
 }
 
 // kotlin: camelCase DSL names (e.g., linuxX64, macosArm64, mingwX64, iosArm64, androidNativeArm64)
@@ -354,8 +361,8 @@ func decomposeKotlin(idx *indices, s string) (Platform, bool) {
 
 // maven: os-arch (e.g., linux-x86_64, osx-aarch_64, windows-x86_64)
 func decomposeMaven(idx *indices, s string) (Platform, bool) {
-	parts := strings.SplitN(s, "-", 2)
-	if len(parts) != 2 {
+	parts := strings.SplitN(s, "-", splitTwo)
+	if len(parts) != splitTwo {
 		return Platform{}, false
 	}
 	osName := resolveOS(idx, Maven, parts[0])

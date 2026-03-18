@@ -136,7 +136,7 @@ func TestTranslateRoundTrip(t *testing.T) {
 				if p.Arch != "x86_64" {
 					t.Errorf("round-trip Arch = %q, want x86_64", p.Arch)
 				}
-				if p.OS != "linux" {
+				if p.OS != osLinux {
 					t.Errorf("round-trip OS = %q, want linux", p.OS)
 				}
 			})

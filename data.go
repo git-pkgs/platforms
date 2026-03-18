@@ -16,6 +16,8 @@ var osesJSON []byte
 //go:embed data/platforms.json
 var platformsJSON []byte
 
+const jsonNull = "null"
+
 // rawMapping is a JSON value that can be a string, array of strings, or null.
 type rawMapping = json.RawMessage
 
@@ -90,7 +92,7 @@ func loadData() (*indices, error) {
 // resolveMapping extracts the string value(s) from a raw JSON mapping.
 // Returns the preferred (first) value and all values.
 func resolveMapping(raw rawMapping) (preferred string, all []string) {
-	if raw == nil || string(raw) == "null" {
+	if raw == nil || string(raw) == jsonNull {
 		return "", nil
 	}
 
