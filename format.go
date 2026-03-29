@@ -5,6 +5,21 @@ import (
 	"strings"
 )
 
+// Common platform string constants used across formatting and parsing.
+const (
+	osLinux   = "linux"
+	osDarwin  = "darwin"
+	osWindows = "windows"
+
+	abiGNU       = "gnu"
+	abiMusl      = "musl"
+	abiMSVC      = "msvc"
+	abiEABI      = "eabi"
+	abiEABIHF    = "eabihf"
+	abiGNUEABI   = "gnueabi"
+	abiGNUEABIHF = "gnueabihf"
+)
+
 // Format converts a canonical Platform into an ecosystem-specific string.
 func Format(eco Ecosystem, p Platform) (string, error) {
 	if !validEcosystem(eco) {
@@ -72,74 +87,25 @@ func compose(idx *indices, eco Ecosystem, p Platform) (string, error) {
 	case Node:
 		return osName + "-" + arch, nil
 	case Rust:
-		vendor := p.Vendor
-		if vendor == "" {
-			vendor = defaultVendor(p.OS)
-		}
-		abi := p.ABI
-		if abi == "" && p.OS == "linux" {
-			abi = "gnu"
-		}
-		if abi != "" {
-			return arch + "-" + vendor + "-" + osName + "-" + rustABI(abi), nil
-		}
-		return arch + "-" + vendor + "-" + osName, nil
+		return composeTriple(arch, osName, p, rustABI), nil
 	case RubyGems:
-		if p.ABI != "" && p.ABI != "gnu" {
-			return arch + "-" + osName + "-" + p.ABI, nil
-		}
-		return arch + "-" + osName, nil
+		return composeRubyGems(arch, osName, p), nil
 	case Python:
 		return composePython(arch, osName, p), nil
 	case Debian:
-		abi := p.ABI
-		if abi == "" && p.OS == "linux" {
-			abi = "gnu"
-		}
-		if abi == "" {
-			return "", &ErrNoMapping{Ecosystem: eco, Platform: p}
-		}
-		return arch + "-" + osName + "-" + debianABI(abi), nil
+		return composeDebian(arch, osName, eco, p)
 	case LLVM:
-		vendor := p.Vendor
-		if vendor == "" {
-			vendor = defaultVendor(p.OS)
-		}
-		abi := p.ABI
-		if abi == "" && p.OS == "linux" {
-			abi = "gnu"
-		}
-		if abi != "" {
-			return arch + "-" + vendor + "-" + osName + "-" + abi, nil
-		}
-		return arch + "-" + vendor + "-" + osName, nil
+		return composeTriple(arch, osName, p, identityABI), nil
 	case NuGet:
-		if p.ABI == "musl" {
-			return osName + "-musl-" + arch, nil
-		}
-		return osName + "-" + arch, nil
+		return composeNuGet(arch, osName, p), nil
 	case Vcpkg:
 		return arch + "-" + osName, nil
 	case Conan:
 		return osName + "/" + arch, nil
 	case Homebrew:
-		if p.OS != "darwin" {
-			return "", &ErrNoMapping{Ecosystem: eco, Platform: p}
-		}
-		return arch + "_darwin", nil
+		return composeHomebrew(arch, eco, p)
 	case Swift:
-		vendor := p.Vendor
-		if vendor == "" {
-			vendor = defaultVendor(p.OS)
-		}
-		abi := p.ABI
-		if abi == "" && p.OS == "linux" {
-			abi = "gnu"
-		}
-		if abi != "" {
-			return arch + "-" + vendor + "-" + osName + "-" + abi, nil
-		}
-		return arch + "-" + vendor + "-" + osName, nil
+		return composeTriple(arch, osName, p, identityABI), nil
 	case Kotlin:
 		return osName + arch, nil
 	case Maven:
@@ -148,11 +114,60 @@ func compose(idx *indices, eco Ecosystem, p Platform) (string, error) {
 	return "", &ErrNoMapping{Ecosystem: eco, Platform: p}
 }
 
+func composeTriple(arch, osName string, p Platform, abiFn func(string) string) string {
+	vendor := p.Vendor
+	if vendor == "" {
+		vendor = defaultVendor(p.OS)
+	}
+	abi := p.ABI
+	if abi == "" && p.OS == osLinux {
+		abi = abiGNU
+	}
+	if abi != "" {
+		return arch + "-" + vendor + "-" + osName + "-" + abiFn(abi)
+	}
+	return arch + "-" + vendor + "-" + osName
+}
+
+func identityABI(abi string) string { return abi }
+
+func composeRubyGems(arch, osName string, p Platform) string {
+	if p.ABI != "" && p.ABI != abiGNU {
+		return arch + "-" + osName + "-" + p.ABI
+	}
+	return arch + "-" + osName
+}
+
+func composeDebian(arch, osName string, eco Ecosystem, p Platform) (string, error) {
+	abi := p.ABI
+	if abi == "" && p.OS == osLinux {
+		abi = abiGNU
+	}
+	if abi == "" {
+		return "", &ErrNoMapping{Ecosystem: eco, Platform: p}
+	}
+	return arch + "-" + osName + "-" + debianABI(abi), nil
+}
+
+func composeNuGet(arch, osName string, p Platform) string {
+	if p.ABI == abiMusl {
+		return osName + "-musl-" + arch
+	}
+	return osName + "-" + arch
+}
+
+func composeHomebrew(arch string, eco Ecosystem, p Platform) (string, error) {
+	if p.OS != osDarwin {
+		return "", &ErrNoMapping{Ecosystem: eco, Platform: p}
+	}
+	return arch + "_darwin", nil
+}
+
 func defaultVendor(os string) string {
 	switch os {
-	case "darwin", "ios":
+	case osDarwin, "ios":
 		return "apple"
-	case "windows":
+	case osWindows:
 		return "pc"
 	default:
 		return "unknown"
@@ -161,10 +176,10 @@ func defaultVendor(os string) string {
 
 func defaultABI(os string) string {
 	switch os {
-	case "linux":
-		return "gnu"
-	case "windows":
-		return "msvc"
+	case osLinux:
+		return abiGNU
+	case osWindows:
+		return abiMSVC
 	default:
 		return ""
 	}
@@ -172,10 +187,10 @@ func defaultABI(os string) string {
 
 func rustABI(abi string) string {
 	switch abi {
-	case "eabihf":
-		return "gnueabihf"
-	case "eabi":
-		return "gnueabi"
+	case abiEABIHF:
+		return abiGNUEABIHF
+	case abiEABI:
+		return abiGNUEABI
 	default:
 		return abi
 	}
@@ -183,12 +198,12 @@ func rustABI(abi string) string {
 
 func debianABI(abi string) string {
 	switch abi {
-	case "eabihf":
-		return "gnueabihf"
-	case "eabi":
-		return "gnueabi"
-	case "gnu":
-		return "gnu"
+	case abiEABIHF:
+		return abiGNUEABIHF
+	case abiEABI:
+		return abiGNUEABI
+	case abiGNU:
+		return abiGNU
 	default:
 		return abi
 	}
@@ -196,7 +211,7 @@ func debianABI(abi string) string {
 
 func composePython(arch, osName string, p Platform) string {
 	switch p.OS {
-	case "darwin":
+	case osDarwin:
 		ver := p.OSVersion
 		if ver == "" {
 			if p.Arch == "aarch64" {
@@ -207,8 +222,8 @@ func composePython(arch, osName string, p Platform) string {
 		}
 		verParts := underscoreVersion(ver)
 		return "macosx_" + verParts + "_" + arch
-	case "linux":
-		if p.ABI == "musl" {
+	case osLinux:
+		if p.ABI == abiMusl {
 			ver := p.LibCVersion
 			if ver == "" {
 				ver = "1.1"
@@ -222,7 +237,7 @@ func composePython(arch, osName string, p Platform) string {
 		}
 		verParts := underscoreVersion(ver)
 		return "manylinux_" + verParts + "_" + arch
-	case "windows":
+	case osWindows:
 		if p.Arch == "i686" {
 			return "win32"
 		}
