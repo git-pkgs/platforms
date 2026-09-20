@@ -5,13 +5,15 @@ on:
     branches:
       - main
     paths:
-      - '.github/workflows/**'
+      - '.github/**'
   pull_request:
     branches:
       - main
     paths:
-      - '.github/workflows/**'
+      - '.github/**'
   workflow_dispatch:
+
+permissions: {}
 
 jobs:
   zizmor:
