@@ -4,6 +4,14 @@ Translate platform identifier strings across package ecosystems.
 
 An ARM64 Mac is `darwin/arm64` to Go, `darwin-arm64` to Node, `aarch64-apple-darwin` to Rust, `arm64-darwin` to RubyGems, and `macosx_11_0_arm64` to Python. This module provides a shared mapping between all of them.
 
+## Installation
+
+```sh
+go get github.com/git-pkgs/platforms
+```
+
+## Usage
+
 ```go
 import "github.com/git-pkgs/platforms"
 
@@ -57,4 +65,4 @@ See [SPEC.md](SPEC.md) for the full specification.
 
 ## License
 
-MIT
+[MIT](LICENSE).
